@@ -37,7 +37,7 @@ def main():
   print(f'read {len(poems)} into file ....')
   #rhyme_schemes = ['ABBA', 'ABCB', 'AAAA', 'ABAB', 'AABB']
   
-  for i in tqdm(range(len(poems))):
+  for i in tqdm(range(len(poems[269:]))):
     loop_time = time.time()
     prompt = get_prompt(poems[1][i])
     #print(prompt)
