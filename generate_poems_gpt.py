@@ -3,9 +3,10 @@ import os
 import argparse
 import csv
 import time
+import config
 from tqdm import tqdm
 
-os.environ['OPENAI_KEY'] = "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"
+os.environ['OPENAI_KEY'] = config.api_key
 openai.api_key = os.getenv('OPENAI_KEY')
 
 parser = argparse.ArgumentParser(description='Generate poems using chatgpt')
