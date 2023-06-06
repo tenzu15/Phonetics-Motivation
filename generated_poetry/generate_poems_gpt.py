@@ -21,8 +21,8 @@ def get_input(language):
   if language == 'english':
     with open("poem_titles.txt", 'r') as file:
       titles = file.readlines()
-  else:
-     with open("poem_titles.txt", 'r') as file:
+  elif language == 'hindi':
+     with open("poem_titles_hindi.txt", 'r') as file:
       titles = file.readlines()
       
   return titles
@@ -30,6 +30,10 @@ def get_input(language):
 def get_prompt(title, language, rhyme):
   if language == 'english':
     prompt = f'Write a short poem on {title} using rhyme scheme {rhyme}'
+  elif language == 'hindi':
+    title = title.replace('\n', '')
+    prompt = f'{title} पर एक छोटी कविता लिखें {rhyme} तुकबंदी योजना का उपयोग करते हुए'
+    
   
   return prompt
 
@@ -42,6 +46,7 @@ def main():
     for rhyme in rhyme_schemes:
       loop_time = time.time()
       prompt = get_prompt(poem_titles[i], args.language, rhyme)
+      print(prompt)
       
       try:
         completion = openai.ChatCompletion.create(
