@@ -4,7 +4,7 @@ import json
 import backoff
 from tqdm import tqdm
 
-os.environ['OPENAI_KEY'] = "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"
+os.environ['OPENAI_KEY'] = "open_ai_key"
 gpt_version = 'gpt-3.5-turbo'
 openai.api_key = os.getenv('OPENAI_KEY')
 
