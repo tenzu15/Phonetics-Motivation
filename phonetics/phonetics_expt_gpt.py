@@ -7,7 +7,7 @@ import config
 import pandas as pd
 from tqdm import tqdm
 
-os.environ['OPENAI_KEY'] = config.api_key
+os.environ['OPENAI_KEY'] = config.gpt_4_key
 openai.api_key = os.getenv('OPENAI_KEY')
 
 parser = argparse.ArgumentParser(description='Get phonetic transcription from gpt in IPA')
