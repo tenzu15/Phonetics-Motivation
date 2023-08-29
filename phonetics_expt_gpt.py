@@ -15,13 +15,13 @@ parser = argparse.ArgumentParser(description='Get phonetic transcription from gp
 parser.add_argument('--task', choices = ['phonemes', 'homophones', 'port'], default = 'port')
 parser.add_argument('--gpt_version', choices=['text-davinci-003', 'gpt-3.5-turbo', 'gpt-4'], default='gpt-4')
 parser.add_argument('--language', choices = ['english', 'hindi'], default = 'english')
-parser.add_argument('--output', type = str, default = 'portf2_output_chatgpt.csv')
+parser.add_argument('--output', type = str, default = 'slantr_output_chatgpt.csv')
 
 args = parser.parse_args()
 
 def get_input(language):
     if language == 'english':
-        df = pd.read_csv('portmanteau.csv', header=None)
+        df = pd.read_csv('slant_rhyme.csv', header=None)
     return df
 
 def get_prompt_phoneme(task, word_1):
@@ -44,7 +44,7 @@ def get_prompt_homophone(task, word_1, word_2):
 
 def get_prompt_port(task, word_1, word_2):
     if task == 'port':
-        prefix = "Rhyme is a linguistic phenomenon characterized by the correspondence of sound between words or word terminations, which is especially noticeable when used at the end of lines in poetic compositions. It entails the repetition of similar auditory elements, frequently the same phonemes, found in the final emphasized syllables and any subsequent syllables of two or more words. Rhyme is characterized by a harmonious alignment of sound, with one word's auditory attributes harmonizing with another, creating a resonance that amplifies poetic expression. \n For example, Texit and exit rhyme with each other, so the answer is yes. But Texit and TexMex do not rhyme with each other, so the answer is No. \n Manny and Fanny rhyme with each other, so the answer is yes. But Manny and Manual do not rhyme with each other, so the answer is No."
+        prefix = "Rhyme is a linguistic phenomenon characterized by the correspondence of sound between words or word terminations, which is especially noticeable when used at the end of lines in poetic compositions. It entails the repetition of similar auditory elements, frequently the same phonemes, found in the final emphasized syllables and any subsequent syllables of two or more words. Rhyme is characterized by a harmonious alignment of sound, with one word's auditory attributes harmonizing with another, creating a resonance that amplifies poetic expression."
         prompt = f'{prefix}\n\n  Are \'{word_1}\' and \'{word_2}\' rhyming words? Please respond: \'Yes\' if they are rhyming and \'No\' if they are not rhyming words.'
     return prompt
         
@@ -56,7 +56,7 @@ def main():
   df = get_input(args.language)
   count = 0
   
-  for i in tqdm(range(500)): #range(len(df))
+  for i in tqdm(range(len(df))): #range(len(df))
     loop_time = time.time()
     word_1 = df[1][i]
     word_2 = df[2][i]
